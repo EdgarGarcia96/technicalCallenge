@@ -1,0 +1,44 @@
+package co.com.choucair.certification.technicalchallenge.tasks;
+
+import co.com.choucair.certification.technicalchallenge.userinterface.RegisterStepOnePage;
+import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.Task;
+import net.serenitybdd.screenplay.Tasks;
+import net.serenitybdd.screenplay.actions.Click;
+import net.serenitybdd.screenplay.actions.Enter;
+import net.serenitybdd.screenplay.actions.SelectFromOptions;
+
+public class RegisterStepOne implements Task {
+    private String strFirstName;
+    private String strLastName;
+    private String strEmail;
+    private String strBirthMonth;
+    private String strBirthDay;
+    private String strBirthYear;
+
+    public RegisterStepOne(String strFirstName, String strLastName, String strEmail, String strBirthMonth, String strBirthDay, String strBirthYear) {
+        this.strFirstName = strFirstName;
+        this.strLastName = strLastName;
+        this.strEmail = strEmail;
+        this.strBirthMonth = strBirthMonth;
+        this.strBirthDay = strBirthDay;
+        this.strBirthYear = strBirthYear;
+    }
+
+    public static RegisterStepOne onThePage(String strFirstName, String strLastName, String strEmail, String strBirthMonth, String strBirthDay, String strBirthYear){
+        return Tasks.instrumented(RegisterStepOne.class, strFirstName, strLastName, strEmail, strBirthMonth, strBirthDay, strBirthYear);
+    }
+
+    @Override
+    public <T extends Actor> void performAs(T actor) {
+        actor.attemptsTo(Enter.theValue(strFirstName).into(RegisterStepOnePage.INPUT_FIRST_NAME),
+                Enter.theValue(strLastName).into(RegisterStepOnePage.INPUT_LAST_NAME),
+                Enter.theValue(strEmail).into(RegisterStepOnePage.INPUT_EMAIL),
+                SelectFromOptions.byValue(strBirthMonth).from(RegisterStepOnePage.SELECT_BIRTH_MONTH),
+                SelectFromOptions.byValue(strBirthDay).from(RegisterStepOnePage.SELECT_BIRTH_DAY),
+                SelectFromOptions.byValue(strBirthYear).from(RegisterStepOnePage.SELECT_BIRTH_YEAR),
+                Click.on(RegisterStepOnePage.LINK_NEXT_STEP)
+
+        );
+    }
+}

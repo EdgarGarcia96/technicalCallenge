@@ -3,7 +3,7 @@ package co.com.choucair.certification.technicalchallenge.userinterface;
 import net.serenitybdd.screenplay.targets.Target;
 import org.openqa.selenium.By;
 
-public class RegisterPage {
+public class RegisterStepOnePage {
     public static final Target INPUT_FIRST_NAME = Target.the("where do we write the first name")
             .located(By.id("firstName"));
 

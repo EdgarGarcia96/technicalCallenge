@@ -13,6 +13,6 @@ public class RegisterStepTwoPage {
     public static final Target INPUT_ZIP = Target.the("where do we write the postal code")
             .located(By.id("zip"));
 
-    public static final Target LINK_NEXT_STEP = Target.the("link to next step two")
+    public static final Target LINK_NEXT_STEP = Target.the("link to next step")
             .located(By.xpath("//a[contains(@class, 'btn btn-blue pull-right')]"));
 }

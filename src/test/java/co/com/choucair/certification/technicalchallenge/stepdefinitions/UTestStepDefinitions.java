@@ -1,5 +1,6 @@
 package co.com.choucair.certification.technicalchallenge.stepdefinitions;
 
+import co.com.choucair.certification.technicalchallenge.model.RegisterData;
 import co.com.choucair.certification.technicalchallenge.questions.Answer;
 import co.com.choucair.certification.technicalchallenge.tasks.*;
 import co.com.choucair.certification.technicalchallenge.userinterface.RegisterStepFourPage;
@@ -10,6 +11,8 @@ import cucumber.api.java.en.When;
 import net.serenitybdd.screenplay.GivenWhenThen;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
+
+import java.util.List;
 
 public class UTestStepDefinitions {
     @Before
@@ -23,15 +26,16 @@ public class UTestStepDefinitions {
     }
 
     @When("^he fill out the form fields$")
-    public void heFillOutTheFormFields() {
-        OnStage.theActorInTheSpotlight().attemptsTo(RegisterStepOne.onThePage("Arturo", "Garcia", "arturo0001@gmail.com", "number:2", "number:12", "number:1996"));
-        OnStage.theActorInTheSpotlight().attemptsTo(RegisterStepTwo.onThePage("Bogota", "111111"));
-        OnStage.theActorInTheSpotlight().attemptsTo(RegisterStepThree.onThePage("Linux", "Ubuntu", "Spanish", "Motorola", "Moto G8", "Android 10"));
-        OnStage.theActorInTheSpotlight().attemptsTo(RegisterStepFour.onThePage("Probando123456789", "Probando123456789"));
+    public void heFillOutTheFormFields(List<RegisterData> registerData) {
+        OnStage.theActorInTheSpotlight().attemptsTo(RegisterStepOne.onThePage(registerData.get(0).getStrFirstName(), registerData.get(0).getStrLastName(), registerData.get(0).getStrEmail(), registerData.get(0).getStrBirthMonth(), registerData.get(0).getStrBirthDay(), registerData.get(0).getStrBirthYear(), registerData.get(0).getStrLanguageSpoken()));
+        OnStage.theActorInTheSpotlight().attemptsTo(RegisterStepTwo.onThePage(registerData.get(0).getStrCity(), registerData.get(0).getStrZip()));
+        OnStage.theActorInTheSpotlight().attemptsTo(RegisterStepThree.onThePage(registerData.get(0).getStrComputer(), registerData.get(0).getStrVersion(), registerData.get(0).getStrLanguage(), registerData.get(0).getStrMobile(), registerData.get(0).getStrModel(), registerData.get(0).getStrOperatingSystem()));
+        OnStage.theActorInTheSpotlight().attemptsTo(RegisterStepFour.onThePage(registerData.get(0).getStrPassword(), registerData.get(0).getStrConfirmedPassword()));
     }
 
     @Then("^he creates the new user on the UTest page$")
-    public void heCreatesTheNewUserOnTheUTestPage() {
-        OnStage.theActorInTheSpotlight().should(GivenWhenThen.seeThat(Answer.toThe("Welcome to the world's largest community of freelance software testers!")));
+    public void heCreatesTheNewUserOnTheUTestPage(List<RegisterData> registerData) {
+        // Se omite por captcha
+        //OnStage.theActorInTheSpotlight().should(GivenWhenThen.seeThat(Answer.toThe(registerData.get(0).getStrVerifyRegister())));
     }
 }

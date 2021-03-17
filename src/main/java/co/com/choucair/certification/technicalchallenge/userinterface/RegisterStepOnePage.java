@@ -22,6 +22,12 @@ public class RegisterStepOnePage {
     public static final Target SELECT_BIRTH_YEAR = Target.the("where do we write the birth year")
             .located(By.id("birthYear"));
 
+    public static final Target INPUT_LANGUAGE = Target.the("where do we write the postal code")
+            .located(By.xpath("//*[@id=\"languages\"]/div[1]/input"));
+
+    public static final Target INPUT_LANGUAGE_RESULT = Target.the("where do we write the postal code")
+            .located(By.xpath("//ul/li//div[contains(@class, 'ui-select-choices-row')]"));
+
     public static final Target LINK_NEXT_STEP = Target.the("link to next step")
             .located(By.xpath("//a[contains(@class, 'btn btn-blue')]"));
 }
